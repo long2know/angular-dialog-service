@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Date Before and After Demo</title>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-loader.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-sanitize.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-touch.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui-ieshiv.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type='text/javascript' src="script.js"></script>
+    <script type='text/javascript' src="../src/dialogService.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myCtrl as vm">
+    <button ng-click="vm.openSimpleModal()">Open Simple</button>
+    <button ng-click="vm.openFormModal()">Open Complex</button>
+    <br />
+    <h3>Shared modal model</h3>
+    <pre>{{ vm.modalFormModel | json }}</pre>
+</div>
+<script type="text/ng-template" id="modalSimple.html">
+    <div class="modal-body">
+        <h3>Confirm Cancellation</h3>
+        <p>All of your changes will be lost. Are you sure you want to cancel your changes?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="button default" ng-click="cancel()">Cancel</button>
+        <button class="button primary" ng-click="ok()">Ok</button>
+    </div>
+</script>
+<script type="text/ng-template" id="modalForm.html">
+    <div class="modal-header">
+        <h3>Enter User Details</h3>
+    </div>
+    <div class="modal-body">
+        <form name="mf.customerForm" novalidate>
+            <div class="content">
+                <div class="form">
+                    <label for="firstname">First Name</label><br>
+                    <div class="form-group" ng-class="{ 'has-error': mf.customerForm.firstname.$invalid }">
+                        <input id="firstname" name="firstname" type="text" class="input primary form-control form-control-inline" placeholder="First Name"
+                               ng-model="mf.dialogModel.firstname" ng-required="true" autocomplete="off" />
+                        <small id="firstnameReq" class="error" ng-show="mf.customerForm.firstname.$error.required">This is a required field.</small>
+                    </div>
+                    <label for="lastname">Last Name</label><br>
+                    <div class="form-group" ng-class="{ 'has-error': mf.customerForm.lastname.$invalid }">
+                        <input name="lastname" type="text" class="input primary form-control form-control-inline" placeholder="Last Name"
+                               ng-model="mf.dialogModel.lastname" ng-required="true" autocomplete="off" />
+                        <small id="lastnameReq" class="error" ng-show="mf.customerForm.lastname.$error.required">This is a required field.</small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <span class="controls">
+            <button type="button" class="button default" ng-click="mf.cancel()">Cancel</button>
+            <button type="submit" class="button primary" ng-click="mf.ok()">Submit</button>
+        </span>
+    </div>
+</script>
+</body>
+</html>
