@@ -18,13 +18,13 @@
         };
 
         vm.openSimpleModal = function () {
-            ds.openDialog("modalSimple.html", ['$scope', '$uibModalInstance', function ($scope, $modalInstance) {
+            ds.openDialog("modalSimple.html", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                 $scope.ok = function () {
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                     $log.log("User clicked ok.");
                 },
                 $scope.cancel = function () {
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                     $log.log("User clicked cancel.");
                 };
             }]);
@@ -35,7 +35,7 @@
         }
     };
 
-    var modalFormController = function ($log, $modalInstance, dialogModel) {
+    var modalFormController = function ($log, $uibModalInstance, dialogModel) {
         var vm = this;
         // Clone so we can cancel our edit
         vm.dialogModel = angular.copy(dialogModel);
@@ -45,11 +45,11 @@
                     dialogModel[p] = vm.dialogModel[p];
                 }
             }
-            $modalInstance.close();
+            $uibModalInstance.close();
             $log.log("User clicked submit - saving changes");
         },
         vm.cancel = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
             $log.log("User clicked cancel.");
         };
     };
@@ -62,9 +62,9 @@
     angular.module('myApp.controllers')
         .controller('myCtrl', myController);
 
-    myApp.config(['$modalProvider', '$locationProvider',
-        function ($modalProvider, $locationProvider) {
-            $modalProvider.options = { dialogFade: true, backdrop: 'static', keyboard: false };
+    myApp.config(['$uibModalProvider', '$locationProvider',
+        function ($uibModalProvider, $locationProvider) {
+            $uibModalProvider.options = { animation: true, backdrop: 'static', keyboard: false };
             $locationProvider.html5Mode(false);
         }]);
 
