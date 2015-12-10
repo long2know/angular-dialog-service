@@ -18,7 +18,7 @@
             ]);
     };
 
-    var dialogService = function ($modal, $sce, $q) {
+var dialogService = function ($modal, $sce, $q) {
         var
             // Generic wrapper around modal opening
             openDialog = function (template, controller) {
@@ -64,13 +64,13 @@
             },
 
             openErrorDialog = function () {
-                var modal = openDialog("modalError.html", ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                var modal = openDialog("modalError.html", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                     var errorTitle = 'Error!';
                     var errorBody = 'Please correct the errors listed!';
                     $scope.modalHeader = $sce.trustAsHtml(errorTitle);
                     $scope.modalBody = $sce.trustAsHtml(stringFormat("<p><strong>{0}</strong></p>", errorBody));
                     $scope.ok = function () {
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     };
                     $scope.hasCancel = false;
                 }]);
@@ -82,7 +82,7 @@
                 var defer = $q.defer();
                 var modalTitle = "Discard your changes?";
                 var modalBody = stringFormat('Are you sure you want to discard your changes?');
-                var modal = openDialog("modalGeneral.html", ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                var modal = openDialog("modalGeneral.html", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                     $scope.modalHeader = $sce.trustAsHtml(modalTitle);
                     $scope.modalBody = $sce.trustAsHtml(stringFormat("<p><strong>{0}</strong></p>", modalBody));
                     $scope.ok = function () {
@@ -115,7 +115,7 @@
         };
     };
 
-    dialogService.$inject = ['$modal', '$sce', '$q'];
+    dialogService.$inject = ['$uibModal', '$sce', '$q'];
     angular.module('long2know.services')
         .factory('dialogService', dialogService);
 })()

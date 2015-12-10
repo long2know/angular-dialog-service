@@ -18,7 +18,7 @@
         };
 
         vm.openSimpleModal = function () {
-            ds.openDialog("modalSimple.html", ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+            ds.openDialog("modalSimple.html", ['$scope', '$uibModalInstance', function ($scope, $modalInstance) {
                 $scope.ok = function () {
                     $modalInstance.close();
                     $log.log("User clicked ok.");
@@ -54,7 +54,7 @@
         };
     };
 
-    modalFormController.$inject = ['$log', '$modalInstance', 'dialogModel'];
+    modalFormController.$inject = ['$log', '$uibModalInstance', 'dialogModel'];
     angular.module('myApp.controllers')
         .controller('modalFormCtrl', modalFormController);
 
